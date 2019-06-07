@@ -1,0 +1,24 @@
+sudo: required
+dist: xenial
+services:
+  - docker
+
+env:
+  global:
+    - REGISTRY_USER=scrumteamravens
+    - REGISTRY_PASS=$REGISTRY_PASS
+ 
+script:
+  - docker build --tag scrumteamravens/tomcat .
+
+after_script:
+  - docker images
+  
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  
+deploy:
+  provider: script
+  script: docker push scrumteamravens/tomcat
+  on:
+    branch: master

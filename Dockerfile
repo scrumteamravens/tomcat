@@ -1,6 +1,6 @@
 FROM tomcat:9-jre11 AS builder
 
-FROM arvasrikanth/story:googlejdk
+FROM scrumteamravens/googleubuntujdk11:latest
 
 COPY --from=builder /usr/local/tomcat /usr/local/tomcat
 
